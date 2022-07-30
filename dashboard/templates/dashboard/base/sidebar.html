@@ -1,0 +1,109 @@
+{% load static %}
+
+<div class="mdk-drawer  js-mdk-drawer" id="default-drawer" data-align="start">
+    <div class="mdk-drawer__content">
+        <div class="sidebar sidebar-dark sidebar-left simplebar bg-dark" data-simplebar>
+            <div class="d-flex align-items-center sidebar-p-a border-bottom sidebar-account flex-shrink-0">
+                <a href="{% url 'dashboard:index' %}" class="flex d-flex align-items-center text-underline-0 text-body">
+                    <span class="flex d-flex flex-column">
+                        <img src="{% static 'dashboard/admin/assets/images/nepal-govt.png' %}" width="80" height="80" alt="avatar">
+                    </span>
+                    <span class="flex d-flex flex-column">
+                        <strong style="font-size: 1.125rem;"><br> सूचना पोर्टल </strong>
+                        <div>v 0.0.1</div>
+                    </span>
+                </a>
+                <div class="dropdown ml-auto">
+                    <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i class="material-icons">keyboard_arrow_down</i></a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <div class="dropdown-item-text dropdown-item-text--lh">
+                            <div><strong>{{ user }}</strong></div>
+                            <div>@ {{ user }}</div>
+                        </div>
+                       
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'dashboard:logout' %}">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="">
+                <div >
+                    <ul class="sidebar-menu flex">
+
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'dashboard:index' %}">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dashboard</i>
+                                <span class="sidebar-menu-text"> Dashboard </span>
+                            </a>
+                        </li>
+
+                        {% if request.user.is_superuser %}
+
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'dashboard:categories-list' %}">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">sort</i>
+                                <span class="sidebar-menu-text"> Category </span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'dashboard:ministries-list' %}">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_balance</i>
+                                <span class="sidebar-menu-text"> Ministry / Office </span>
+                            </a>
+                        </li>
+
+                        {% comment %} <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'dashboard:offices-list' %}">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">business</i>
+                                <span class="sidebar-menu-text"> Office </span>
+                            </a>
+                        </li> {% endcomment %}
+
+                        {% endif %}
+
+                        {% if not request.user.is_superuser %}
+
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'dashboard:notices-list' %}">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">note</i>
+                                <span class="sidebar-menu-text"> Notice </span>
+                            </a>
+                        </li>
+                        
+                        {% endif %}
+
+                        {% if request.user.is_superuser %}
+
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'dashboard:accounts-list' %}">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">account_circle</i>
+                                <span class="sidebar-menu-text"> Users </span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'dashboard:audittrail-list' %}">
+                                <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
+                                <span class="sidebar-menu-text"> Audit </span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-auto sidebar-p-a sidebar-b-t d-flex flex-column flex-shrink-0">
+              
+                <a class="sidebar-link" href="{% url 'dashboard:logout' %}">
+                    Logout
+                    <i class="sidebar-menu-icon ml-2 material-icons icon-16pt">exit_to_app</i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

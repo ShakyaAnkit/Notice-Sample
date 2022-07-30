@@ -1,0 +1,46 @@
+{% extends 'dashboard/base/index.html'%}
+{% load static %}
+
+{% block title %}Audit{% endblock %}
+
+{% block subtitle %} Audit {% endblock %}
+
+{% block content %}
+<div class="container-fluid page__container">
+    <div class="card document-card">
+        <div class="row ml-2 mr-2 mb-2 mt-2">
+            <div class="col-sm-12 document-table-space" style="margin: 0px;">
+                <h3 >Audit</h3>
+                <table class="table no-margin" id="detTable">
+                    <thead>
+                        <tr>
+                            <th>S.N</th>
+                            <th>Who</th>
+                            <th>Action</th>
+                            <th>Item</th>
+                            <th>Item Name</th>
+                            <th>IP</th>
+                            <th>Ago</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for audit in object_list %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ audit.user }}</td>
+                            <td><span class="badge badge-primary">{{ audit.what_is }}</span></td>
+                            <td><span class="badge badge-success">{{ audit.modelType }}</span></td>
+                            <td>{{ audit.what_is_display }}</td>
+                            <td>{{ audit.ip }}</td>
+                            <td>{{ audit.created_at|timesince }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% include 'dashboard/base/pagination.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,29 @@
+# This file allows us to define or create multi container docker application
+# Define all of the images that you want to use in this multi container environment
+version: '3.3' # or use latest version
+# containers you want to use
+services : 
+    django:
+        build: 
+            context: .
+        command : python manage.py runserver 0.0.0.0:8000
+        volumes: 
+            - .:/app
+        ports: 
+            - 8000:8000 
+        networks:
+            - django_network
+
+networks:
+    django_network:
+        driver: bridge                
+    #     depends_on:
+    #         - pgdb
+    # pgdb: 
+    #     image: postgres
+    #     container_name : pgdb
+    #     environment: 
+    #         - POSTGRES_DB=postgres
+    #         - POSTGRES_USER=ankit
+    #         - POSTGRES_PASSWORD=admin@123
+

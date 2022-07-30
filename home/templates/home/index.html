@@ -1,0 +1,187 @@
+{% extends "home/base/index.html" %}
+
+{% load static %}
+
+{% load nepalidatetime %}
+
+{% nepalinow %}
+
+{% nepalinow '%Y-%m-%d' %}
+
+{% block content %}
+
+<main>
+    <section class="list mt-60 mb-60">
+        <div class="container list-style">
+            <h2>सूचनाको सूची</h2>
+            <p>सबै सरकारी सूचना लिंकहरू तालिकामा उपलब्ध छन्। कृपया थप सूचनाको लागि लिंकमा क्लिक गर्नुहोस्।</p>  
+                <div class="mt-30">
+                    <div class="filter-section ">
+                        <form method="GET" action="" accept-charset="UTF-8">
+                            <div class="form-row" style="display:flex; justify-content:space-between;">
+                                <div class="form-group ml-1 mr-1" style="flex:1;">
+                                    <div class="search mb-1 mt-1">
+                                        <input class="form-control" id="search" type="text" name="search" placeholder="Search.." value="{{ request.GET.search | default:'' }}">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3" >
+                                    <div class="dropdown mb-1 mt-1">
+                                        <div class="form-group">
+                                            <select class="form-control select2" id="id_ministry" name="ministry" value="">
+                                                <option value="">मन्त्रालय / कार्यालय छनौट गर्नुहोस्</option>
+                                                {% for ministry in ministries %}
+                                                <option value="{{ ministry.pk }}" {% if request.GET.ministry == ministry.pk|stringformat:"i" %}selected{% endif %}>{{ ministry }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            </div>
+                                    </div>
+                                </div>
+                                {% comment %} <div class="form-group col-md-2">
+                                    <div class="dropdown mb-1 mt-1">
+                                        <div class="form-group">
+                                    
+                                            <select class="form-control select2" id="id_office" name="office" value="">
+                                                <option value="">कार्यालय छनौट गर्नुहोस्</option>
+                                                {% for office in offices %}
+                                                <option value="{{ office.pk }}" {% if request.GET.office == office.pk|stringformat:"i" %}selected{% endif %}>{{ office }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            </div>
+                                    </div>
+                                </div> {% endcomment %}
+                                <div class="form-group col-md-2">
+                                    <div class="startdate mb-1 mt-1">
+                                        <input type="text" class="date-picker form-control " name="start_date" placeholder="सुरू मिति " data-single="true" value="{{ request.GET.start_date | default:''}}" />
+                                        <span class="error" style="color: red;">{{ form.start_date.errors }}</span>
+                                        <!-- <input class="form-control" type="date" value="2011-08-19" id="example-date-input" > -->
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <div class="enddate mb-1 mt-1">
+                                        <input type="text" class="date-picker form-control" name="end_date" placeholder="अन्त्य मिति" data-single="true" value="{{ request.GET.end_date | default:''}}" />
+                                        <span class="error" style="color: red;">{{ form.errors }}</span>
+                                        <!-- <input class="form-control" type="date" value="2011-08-19" id="example-date-input"> -->
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display: flex; justify-content:center">
+                                    <div class="submit-btn ml-1 mt-1 mb-1">
+                                        <button type="submit" class="btn ">Filter</button>
+                                    </div>
+                                    <div class="submit-btn ml-2 mr-2 mt-1 mb-1" style="width:30px;">
+                                        <a href="{% url 'home:home' %}" class="btn btn-secondary"><i class="fas fa-times"></i></a>
+                                    </div>
+                                </div>
+                                    
+                            </div>
+                            
+                            
+                        </form>
+                        
+                        
+                    </div>
+                
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped" id="">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="flex-spaces">
+                                        <div class="title">
+                                            मिति
+                                        </div>
+                                        <div class="up-down d-flex flex-column">
+                                            <i class="fas fa-sort-up"></i>
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex-spaces">
+                                        <div class="title">
+                                            मन्त्रालय / कार्यालय
+                                        </div>
+                                        <div class="up-down d-flex flex-column">
+                                            <i class="fas fa-sort-up"></i>
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex-spaces">
+                                        <div class="title">
+                                            सूचना विवरण
+                                        </div>
+                                        <div class="up-down d-flex flex-column">
+                                            <i class="fas fa-sort-up"></i>
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex-spaces">
+                                        <div class="title">
+                                            सूचना विवरण
+                                        </div>
+                                        <div class="up-down d-flex flex-column">
+                                            <i class="fas fa-sort-up"></i>
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="flex-spaces">
+                                        <div class="title">
+                                            थप हेर्नुहोस्
+                                        </div>
+                                        <div class="up-down d-flex flex-column">
+                                            <i class="fas fa-sort-up"></i>
+                                            <i class="fas fa-sort-down"></i>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                            {% for notice in object_list %}
+                            <tr>
+                                <td>{{ notice.notice_date|nepalidate }}</td>
+                                <td>{{ notice.ministry|default:'' }}</td>
+                                <td>
+                                    <a target="_blank" href="{{ notice.link }}">
+                                    {{ notice.title }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <div class=" image-format">
+                                        {% if notice.has_file %}
+                                        <a target="_blank" class="btn btn-sm btn-primary" href="{{ notice.file_url }}">डाउनलोड</a>
+                                        {% endif %}
+                                    </div>
+                                    
+                                </td>
+
+                                <td>
+                                    <div class="view-all">
+                                        <a target="_blank" href="{{ notice.link }}">
+                                        <button>थप हेर्नुहोस्</button>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center">कुनै परिणाम भेटिएन</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                {% include 'home/base/pagination.html' %}
+            </div>
+            </div>
+    </section>
+</main>
+{% endblock %}

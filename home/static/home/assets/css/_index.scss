@@ -1,0 +1,148 @@
+@import '_variables';
+.pradesh-title{
+    ul{
+        li{
+        list-style: none !important;
+    }
+}
+}
+.notice-name{
+    h2{
+        color: white;
+    }
+    h5{
+        color: white;
+    }
+}
+.image-size{
+    width: 120px;
+}
+.image-flag{
+    width: 80px;
+}
+.hr-style{
+    hr{
+        background-color: $theme-color;
+        height: 10px;
+    }
+}
+.list{
+  
+    h2{
+        font-size: 32px;
+        margin-bottom: 5px;
+        color: white;
+    }
+    p{
+        margin-bottom: 5px;
+        color: $light-color;
+    }
+  
+}
+.filter-section{
+    background-color: rgba(black,.4);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.image-format{
+    width: 30px;
+    margin: 0 auto;
+    display: block;
+}
+.view-all{
+    button{
+        background: transparent;
+        border: 2px solid $theme-color;
+        border-radius: 4px;
+        color: $theme-color;
+        padding: 5px 10px;
+        display: block;
+        margin: 0 auto;
+        &:hover{
+            background-color: $theme-color;
+            color: white;
+        }
+    }
+}
+.submit-btn button{
+    background-color: rgba($theme-color,.9);
+    border: 2px solid rgba($theme-color,.9);
+    color: white;
+    box-shadow: $box-shadow;
+    padding: 6px 20px;
+    width: 100%;
+    &:hover{
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+    }
+}
+.form-group {
+   margin-bottom: 0px !important;
+}
+.pagination a {
+   
+    // float: left;
+    // justify-content: center;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: white;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    margin: 0 4px;
+    
+  }
+  
+  .pagination a.pagination-active {
+    background-color: $theme-color;
+    color: white;
+    border: 1px solid $theme-color;
+   
+  }
+  
+  .pagination a:hover:not(.pagination-active) {
+        background-color: rgba($theme-color,.8);
+        color: white;
+       
+} 
+.up-down{
+    i{
+        line-height: 2px;
+        color:$footer-top-background-color;
+       
+    }
+}
+ .form-control[readonly] {
+   background-color: white;
+   
+}
+.background-image{
+    height: 100%;
+}
+.background-layer{
+    position: absolute;
+    // background-color: rgba($dark-color,0.5);
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+.table-bordered {
+    background: white;
+    box-shadow: 0 5px 20px (rgba(0,0,0 ,.6));
+    
+}
+.select2-container--default .select2-search--inline .select2-search__field{
+    outline: 0px !important;
+    border: 0px !important;
+    
+}
+.select2-container--default .select2-selection--multiple{
+    padding: 6px 10px;
+}
+// .title{
+//     color: white;
+// }
+// .table-bordered th, .table-bordered td{
+//     color: white;
+// }

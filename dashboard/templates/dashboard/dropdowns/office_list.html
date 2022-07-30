@@ -1,0 +1,4 @@
+<option value="">Choose Office </option>
+{% for office in offices %}
+<option value="{{ office.pk }}">{{ office.name }}</option>
+{% endfor %}

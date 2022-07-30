@@ -1,0 +1,100 @@
+{% extends "dashboard/base/index.html" %} 
+
+{% load static %}
+
+{% block title %}Notices{% endblock %}
+
+{% block subtitle %}Notices{% endblock %}
+
+{% block head %}
+
+
+{% endblock %} 
+
+{% block style %}
+<style>
+  
+    .page__container{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .document-card{
+        padding: 30px;
+    }
+</style>
+{% endblock style %}
+
+
+{% block content %}
+
+<!-- Header Layout Content -->
+<div class="container-fluid page__container">
+	<div class="card document-card">
+		<div class="row">
+			<div class="col-md-12" style="display: flex; justify-content:flex-end">
+			{% if account.api_url != None and not user.is_superuser%}
+				<div style="text-align: right; margin-bottom: 35px; margin-right: 40px;">
+					<a href="{% url 'dashboard:notices-sync-api' %}" class="btn btn-outline-success" >
+						<i class="fa fa-sync"></i>&nbsp; Sync 
+					</a>                                      
+				</div>
+			{% endif %}
+				<div style="text-align: right; margin-bottom: 35px;">
+					<a href="{% url 'dashboard:notices-create' %}" class="btn btn-outline-primary" >
+						<i class="fa fa-plus"></i>&nbsp; Add 
+					</a>                                      
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12 document-table-space">
+				<table class="table w-full no-footer" role="grid" >
+					<thead class="table-space-top-bottom">
+						<tr role="row">
+							<th>S.N</th>
+							<th>Title</th>
+							<th>Description</th>
+							<th>File</th>
+							<th>Date</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for object in object_list %}
+						<tr>
+							<td>{{ forloop.counter }}</td>
+							<td>{{ object.title |truncatechars:50 }}</td>
+							<td>{{ object.description|striptags|safe|truncatechars:30 |default_if_none:'' }}</td>
+							<td>
+								{% if object.has_file %}
+								<a target="_blank" class="btn btn-sm btn-primary" href="{{ object.file_url }}">Download</a>
+								{% endif %}
+							</td>
+							<td>{{ object.notice_date }}</td>
+							<td>
+								<div class="btn-group" role="group">
+									<a href="{% url 'dashboard:notices-detail' object.pk %}" class="btn-sm btn btn-success btn-success-space " data-toggle="tooltip" data-original-title="Detail"><i
+										class="fa fa-book"></i></a>
+									<a href="{% url 'dashboard:notices-update' object.pk %}" class="btn-sm btn btn-info btn-success-space " data-toggle="tooltip" data-original-title="Modify">
+										<i class="fa fa-pencil-alt"></i>
+									</a>
+									<a href="{% url 'dashboard:notices-delete' object.pk %}" class="btn-sm btn btn-danger a-delete delete-link" data-toggle="tooltip" data-original-title="Delete">
+										<i class="far fa-trash-alt"></i>
+									</a>
+								</div>
+							</td>
+						</tr>
+						{% endfor %}   
+					</tbody>
+				</table>
+				{% include 'dashboard/base/pagination.html' %}
+			</div>
+		</div>
+	</div>
+</div>
+<!-- // END header-layout__content -->
+{% endblock %}
+
+
+

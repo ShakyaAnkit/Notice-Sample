@@ -1,0 +1,42 @@
+{% load paginator %}
+
+{% if is_paginated %}
+<div class="document-pagination">
+	<ul class="pagination justify-content-left">
+		
+		{% if page_obj.has_previous %}
+		<li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+		{% else %}
+		<li class="page-item disabled"><a class="page-link" href="#"><span>&laquo;</span></a></li>
+		{% endif %}
+
+		{% for page in paginator|pages:page_obj %}
+		
+		{% if page %}
+
+		{% if page_obj.number == page %}
+		<li class="page-item active"><a class="page-link" href="#">{{ page }}</a></li>
+		{% elif request.GET.q %}
+		<li class="page-item"><a class="page-link" href="?q={{request.GET.q}}&amp;page={{ page }}">{{ page }}</a></li>
+		{% elif request.GET.value %}
+		<li class="page-item"><a class="page-link" href="?key={{request.GET.key}}&amp;value={{request.GET.value}}&amp;type={{request.GET.type}}&amp;page={{ page }}">{{ page }}</a></li>
+		{% else %}
+		<li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+		{% endif %}
+		
+		{% else %}
+		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+		{% endif %}
+
+		{% endfor %}
+
+		{% if page_obj.has_next %}
+		<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+		{% else %}
+		<li class="page-item disabled"><a class="page-link" href="#"><span>&raquo;</span></a></li>
+		{% endif %}
+
+	</ul>
+</div> 
+
+{% endif %}
