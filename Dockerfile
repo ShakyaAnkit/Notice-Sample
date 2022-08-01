@@ -10,6 +10,7 @@ WORKDIR /app
 COPY requirements.txt /app
 # RUN pip uninstall django example 
 RUN pip install -r requirements.txt
+RUN pip install Pillow
 
 COPY . /app/    
 
