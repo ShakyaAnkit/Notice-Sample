@@ -1,4 +1,4 @@
-# Sample Project
+# Notice Portal 
 
 ## Project Setup
 ```bash
