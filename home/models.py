@@ -14,6 +14,10 @@ class SingletonModel:
 
 	@classmethod
 	def get_instance(cls):
+		"""
+		If instance exists return instance
+		else return empty object instance
+		"""
 		if cls.has_object():
 			return cls.objects.first()
 		return cls()
